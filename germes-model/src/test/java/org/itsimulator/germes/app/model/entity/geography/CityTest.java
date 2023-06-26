@@ -56,8 +56,20 @@ public class CityTest {
 	public void testRemoveStationSuccess() {
 		Station station = new Station();
 		
+		city.addStation(station);
 		
+		city.removeStation(station);
 		
-		station.remove()
+		assertTrue(city.getStations().isEmpty());
 	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testRemoveNullStation() {
+		city.removeStation(null);
+		
+		assertTrue(false);
+	}
+	
+	
+	
 }

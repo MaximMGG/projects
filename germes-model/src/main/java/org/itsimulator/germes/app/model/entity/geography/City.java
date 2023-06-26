@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import org.itsimulator.germes.app.infra.util.CommonUtil;
 import org.itsimulator.germes.app.model.entity.base.AbstractEntity;
 
 
@@ -62,7 +63,7 @@ public class City extends AbstractEntity{
 	}
 
 	public Set<Station> getStations() {
-		return Collections.unmodifiableSet(Optional.ofNullable(stations).orElse(Collections.emptySet()));
+		return CommonUtil.getSafeSet(stations);
 	}
 
 	public void setStations(Set<Station> stations) {
@@ -84,6 +85,22 @@ public class City extends AbstractEntity{
 		stations.add(station);
 		
 		station.setCity(this);
+	}
+	
+	/**
+	 * Removes specified station from city station list
+	 * @param station
+	 */
+	
+	public void removeStation(Station station) {
+		
+		Objects.requireNonNull(station, "Station parameter is not ititialized");
+		
+		if (stations == null) {
+			return;
+		}
+		
+		stations.remove(station);
 	}
 
 }
