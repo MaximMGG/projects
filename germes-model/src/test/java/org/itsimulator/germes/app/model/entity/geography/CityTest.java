@@ -2,6 +2,7 @@ package org.itsimulator.germes.app.model.entity.geography;
 
 import static org.junit.Assert.*;
 
+import org.itsimulator.germes.app.model.entity.transport.TransportType;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,16 +17,15 @@ public class CityTest {
 	
 	@Before
 	public void setup() {
-		city = new City();
+		city = new City("Poltava");
 	}
 
 	@Test
 	public void testAddValidStationSuccess() {
-		Station station = new Station();
-		
-		city.addStation(station);
+		Station station = city.addStation(TransportType.AUTO);
 		
 		assertTrue(containsStation(city, station));
+		assertEquals(city, station.getCity());
 	}
 	
 	private boolean containsStation(City city, Station station) {
@@ -40,23 +40,10 @@ public class CityTest {
 		assertTrue(false);
 	}
 	
-	@Test
-	public void testAddDuplicateStationFailure() {
-		
-		Station station = new Station();
-		
-		city.addStation(station);
-		
-		city.addStation(station);
-		
-		assertEquals(city.getStations().size(), 1);
-	}
 	
 	@Test
 	public void testRemoveStationSuccess() {
-		Station station = new Station();
-		
-		city.addStation(station);
+		Station station = city.addStation(TransportType.AUTO);
 		
 		city.removeStation(station);
 		
