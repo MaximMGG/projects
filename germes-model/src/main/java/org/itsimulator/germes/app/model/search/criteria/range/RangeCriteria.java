@@ -1,5 +1,8 @@
 package org.itsimulator.germes.app.model.search.criteria.range;
 
+import org.itsimulator.germes.app.infra.exception.flow.InvalidParameterException;
+
+import ;
 
 /**
  * Pagination parameters for data retrieval operations
@@ -17,6 +20,13 @@ public class RangeCriteria {
 	private final int rowCount;
 	
 	public RangeCriteria(final int page, final int rowCount) {
+		if (page < 0) {
+			throw new InvalidParameterException("Incorrect page index: " + page);
+		}
+		if (rowCount < 0) {
+			throw new InvalidParameterException("Incorrect row index: " + rowCount);
+		}
+		
 		this.page = page;
 		this.rowCount = rowCount;
 	}
