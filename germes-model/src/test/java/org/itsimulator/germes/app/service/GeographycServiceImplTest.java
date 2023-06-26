@@ -1,12 +1,19 @@
-package org.itsimulator.germes.app.model.entity.geography;
+package org.itsimulator.germes.app.service;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.itsimulator.germes.app.model.entity.geography.City;
+import org.itsimulator.germes.app.service.impl.GeographicServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
+
+/**
+ * Contain unit-tests for {@link GeographicServiceImpl}
+ * @author maxim
+ */
 
 public class GeographycServiceImplTest {
 
@@ -28,7 +35,7 @@ public class GeographycServiceImplTest {
 	public void testSaveNewCitySuccess() {
 		City city = new City("Poltava");
 		
-		servise.savaCity(city);
+		service.saveCity(city);
 		
 		List<City> cities = service.findCities();
 		
